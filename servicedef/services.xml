@@ -23,11 +23,4 @@ under the License.
     <description>Productmgr Services</description>
     <vendor></vendor>
     <version>1.0</version>
-
-    <service name="noSyntaxError" engine="interface">
-        <description>
-            Dummy service to prevent empty files and syntax error - Remove when the 1st real service will be added here 
-        </description>
-    </service> 
-    
 </services>

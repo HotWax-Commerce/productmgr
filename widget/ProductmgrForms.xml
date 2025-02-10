@@ -21,5 +21,35 @@ under the License.
 <forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://ofbiz.apache.org/Widget-Form" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Form http://ofbiz.apache.org/dtds/widget-form.xsd">
 
+  <form name="FindProduct" type="single" target="findProduct">
+    <field name="noConditionFind"><hidden value="Y"/> </field>
+    <field name="productId" title="ProductId"><text-find/></field>
+    <field name="productFeatureId" title="ProductFeatureId"><text-find/></field>
+    <field name="productName" title="ProductName"><text-find/></field>
+    <field name="productTypeId" title="ProductTypeId"><text-find/></field>
+    <field name="productCategoryId" title="ProductCategoryId"><text-find/></field>
+    <field name="price" title="Price"><text-find/></field>
+    <field name="searchButton" title="Find" widget-style="smallSubmit"><submit
+        button-type="button"
+        image-location="/images/icons/magnifier.png"/>
+    </field>
+  </form>
 
+  <form name="ListOfProduct" type="list" list-name="listIt" default-entity-name="FindProductView" separate-columns="true">
+    <actions>
+      <property-map resource="ProductmgrUiLabels" map-name="lLables" global="true"/>
+      <!-- Preparing search results for user query by using OFBiz stock service to perform find operations on a single entity or view entity -->
+      <service service-name="performFind" result-map="result" result-map-list="listIt">
+        <field-map field-name="inputFields" from-field="productmgrCtx"/>
+        <field-map field-name="entityName" value="FindProductView"/>
+        <field-map field-name="orderBy" from-field="parameters.sortField"/>
+      </service>
+    </actions>
+    <field name="productId" title="${lLables.ProductId}"><display/></field>
+    <field name="productFeatureId" title="${lLables.ProductFeatureId}"><display/></field>
+    <field name="productName" title="${lLables.ProductName}"><display/></field>
+    <field name="productTypeId" title="${lLables.ProductTypeId}"><display/></field>
+    <field name="productCategoryId" title="${lLables.ProductCategoryId}"><display/></field>
+    <field name="price" title="${lLables.Price}"><display/></field>
+  </form>
 </forms>
