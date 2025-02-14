@@ -21,6 +21,30 @@ under the License.
 <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://ofbiz.apache.org/dtds/services.xsd">
     <description>Productmgr Services</description>
-    <vendor></vendor>
     <version>1.0</version>
+
+    <service name="findProductService"
+             location="component://productmgr/groovyScripts/FindProduct1.groovy"
+             invoke="findMethod"
+             default-entity-name="FindProductView"
+             engine="groovy">
+        <auto-attributes mode="IN">
+            <exclude field-name="productTypeId"/>
+            <exclude field-name="productCategoryId"/>
+        </auto-attributes>
+        <attribute name="productList" type="java.util.List" mode="OUT"/>
+    </service>
+
+    <service name="createProductService"
+             location="groovyScripts/createProduct.groovy"
+             invoke="createProduct"
+             default-entity-name="Product"
+             engine="java">
+        <auto-attributes mode="IN">
+            <exclude field-name="productTypeId"/>
+            <exclude field-name="productCategoryId"/>
+        </auto-attributes>
+        <attribute name="productList" type="java.util.List" mode="OUT"/>
+    </service>
+
 </services>
