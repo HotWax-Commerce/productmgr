@@ -49,9 +49,8 @@ under the License.
 
     <request-map uri="findProductById">
         <security https="true" auth="true"/>
-        <event type="java"
-               path="com.company.productmgr.events.FindProdEvent"
-               invoke="findProductMethod"/>
+        <event type="service"
+               invoke="findProductService"/>
         <response name="success" type="view" value="findProduct"/>
         <response name="error" type="view" value="main"/>
     </request-map>

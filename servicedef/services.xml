@@ -28,23 +28,23 @@ under the License.
              invoke="findMethod"
              default-entity-name="FindProductView"
              engine="groovy">
-        <auto-attributes mode="IN">
-            <exclude field-name="productTypeId"/>
-            <exclude field-name="productCategoryId"/>
-        </auto-attributes>
-        <attribute name="productList" type="java.util.List" mode="OUT"/>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="productFeatureId" type="String" mode="IN" optional="true"/>
+        <attribute name="productName" type="String" mode="IN" optional="true"/>
+        <attribute name="price" type="String" mode="IN" optional="true"/>
+        <attribute name="context" type="Map" mode="OUT"/>
     </service>
 
     <service name="createProductService"
-             location="groovyScripts/createProduct.groovy"
+             location="component://productmgr/groovyScripts/createProduct.groovy"
              invoke="createProduct"
              default-entity-name="Product"
-             engine="java">
-        <auto-attributes mode="IN">
-            <exclude field-name="productTypeId"/>
-            <exclude field-name="productCategoryId"/>
-        </auto-attributes>
-        <attribute name="productList" type="java.util.List" mode="OUT"/>
+             engine="groovy">
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="productCategoryId" type="String" mode="IN" optional="false"/>
+        <attribute name="productName" type="String" mode="IN" optional="false"/>
+        <attribute name="price" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="productId" type="String" mode="OUT"/>
     </service>
 
 </services>

@@ -7,6 +7,7 @@ import org.apache.ofbiz.entity.GenericValue;
 import org.apache.ofbiz.service.GenericServiceException;
 import org.apache.ofbiz.service.LocalDispatcher;
 import org.apache.ofbiz.service.*;
+import org.apache.ofbiz.base.util.UtilValidate;
 
 import org.apache.ofbiz.base.util.Debug;
 
@@ -19,10 +20,10 @@ public class FindProdEvent {
     GenericValue userLogin = (GenericValue) request.getSession().getAttribute("userLogin");
     LocalDispatcher dis = (LocalDispatcher) request.getAttribute("dispatcher");
 
-    String productId = request.getParameter("productId");
-    String productName = request.getParameter("productName");
-    String productFeatureId = request.getParameter("productFeatureId");
-    String price = request.getParameter("price");
+    String productId = UtilValidate.isNotEmpty(request.getParameter("productId")) ? request.getParameter("productId") : null;
+    String productName = UtilValidate.isNotEmpty(request.getParameter("productName")) ? request.getParameter("productName") : null;
+    String price = UtilValidate.isNotEmpty(request.getParameter("price")) ? request.getParameter("price") : null;
+    String productFeatureId = UtilValidate.isNotEmpty(request.getParameter("productFeatureId")) ? request.getParameter("productFeatureId") : null;
 
     Map<String, Object> product = new HashMap<>();
     product.put("productId", productId);

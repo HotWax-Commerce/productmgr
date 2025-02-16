@@ -1,47 +1,54 @@
-import org.apache.ofbiz.entity.GenericValue;
-import org.apache.ofbiz.entity.GenericEntityException;
+import org.apache.ofbiz.base.util.UtilValidate
 import org.apache.ofbiz.entity.condition.EntityCondition
 import org.apache.ofbiz.entity.condition.EntityOperator
 
 logInfo("---------------FindProductService called-----------");
 
 def findMethod() {
-    condList=[]
-    if(parameters.productId){
-        cond= EntityCondition.makeCondition("productId",  EntityOperator.EQUALS, parameters.productId)
-        condList.add(cond)
+    def condList = []
+    logInfo("---------------FindProductService called-----------");
+    String productId = UtilValidate.isNotEmpty(parameters.get("productId")) ? parameters.get("productId") : null;
+    String productName = UtilValidate.isNotEmpty(parameters.get("productName")) ? parameters.get("productName") : null;
+    BigDecimal price = UtilValidate.isNotEmpty(parameters.get("price")) ? new BigDecimal(parameters.get("price")) : null;
+    String productFeatureId = UtilValidate.isNotEmpty(parameters.get("productFeatureId")) ? parameters.get("productFeatureId") : null;
+
+
+
+    if (productId) {
+        condList.add(EntityCondition.makeCondition("productId", EntityOperator.EQUALS, productId))
     }
 
-    if(parameters.productName){
-        cond= EntityCondition.makeCondition("productName",  EntityOperator.EQUALS, parameters.productName)
-        condList.add(cond)
+    if (productName) {
+        condList.add(EntityCondition.makeCondition("productName", EntityOperator.EQUALS, productName))
     }
 
-    if(parameters.productCategoryId){
-        cond= EntityCondition.makeCondition("productCategoryId",  EntityOperator.EQUALS, parameters.productCategoryId)
-        condList.add(cond)
+    if (price) {
+        condList.add(EntityCondition.makeCondition("price", EntityOperator.EQUALS, price))
     }
 
-    if(parameters.price){
-        cond= EntityCondition.makeCondition("price",  EntityOperator.EQUALS, parameters.price)
-        condList.add(cond)
-    }
-    if(parameters.productFeatureId){
-        cond= EntityCondition.makeCondition("productFeatureId",  EntityOperator.EQUALS, parameters.productFeatureId)
-        condList.add(cond)
+    if (productFeatureId) {
+        condList.add(EntityCondition.makeCondition("productFeatureId", EntityOperator.EQUALS, productFeatureId))
     }
 
-    productList= select("productId","productName", "price", "productFeatureId", "productCategoryId","productTypeId")
-        .from("FindProductView")
-        .where(condList)
-        .orderBy("productId", "productFeatureId").distinct()
-        .cursorScrollInsensitive()
-        .cache(true)
-        .queryList()
-    logInfo("---------------productList----------- " + productList)
-    logInfo("--------------- context----------- " + context)
-    logInfo("--------------- parameters----------- " + parameters)
-    context.put("productList",productList)
-    logInfo("--------------- ListProduct----------- " + context.get("productList"))
-    return ["productList": productList]
+    if (condList.isEmpty()) {
+        logInfo("No search criteria provided. Returning empty product list.")
+        parameters.put("productList", [])
+        return parameters
+    }
+
+    def productList = select("productId", "productName", "price", "productFeatureId", "productCategoryId", "productTypeId")
+            .from("FindProductView")
+            .where(condList)
+            .orderBy("productId", "productFeatureId")
+            .distinct()
+            .cursorScrollInsensitive()
+            .cache(true)
+            .queryList()
+
+    logInfo("Found products: " + productList.size())
+    parameters.put("productList", productList)
+    context.put("productList", productList)
+    logInfo("XXXXXXXXXXXXXXXXXX Context XXXXXXXXXXXXX: " + context)
+    logInfo("xxxxxxxxxxxxxxx parameters XXXXXXXXXXXXXXX: " + parameters)
+
 }

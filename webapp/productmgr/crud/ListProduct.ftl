@@ -1,6 +1,6 @@
 <h1>List of Products will be displayed here</h1>
-<#if productList?? && productList?has_content>
-<table class="table table-bordered">
+<#if parameters.productList?has_content>
+<table class="basic-table">
     <thead>
         <tr>
             <th>ProductId</th>
@@ -12,7 +12,7 @@
         </tr>
     </thead>
     <tbody>
-        <#list productList as product>
+        <#list parameters.productList as product>
             <tr>
                 <td>${product.productId}</td>
                 <td>${product.productName}</td>
@@ -24,6 +24,4 @@
         </#list>
     </tbody>
 </table>
-<#else>
-    <p>No products found.</p>
 </#if>

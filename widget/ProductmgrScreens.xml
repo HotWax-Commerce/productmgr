@@ -38,44 +38,37 @@ under the License.
         <section>
             <actions>
                 <set field="headerItem" value="findProduct"/>
-                <property-map resource="ProductmgrUiLabels" map-name="lLables" global="true"/>
                 <set field="titleProperty" value="Search Your Product"/>
                 <set field="productmgrCtx" from-field="parameters"/>
+                <script location="component://productmgr/webapp/productmgr/WEB-INF/actions/crud/ListProduct.groovy"/>
             </actions>
             <widgets>
                 <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
                     <decorator-section name="body">
-                        <section>
-                            <widgets>
-                                <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
-                                    <decorator-section name="search-options">
-                                        <section>
-                                            <widgets>
-                                                <platform-specific>
-                                                    <html><html-template location="component://productmgr/webapp/productmgr/FindProduct.ftl"/></html>
-                                                </platform-specific>
-                                            </widgets>
-                                        </section>
-                                    </decorator-section>
-                                    <decorator-section name="ProductList">
-                                        <section>
-                                            <widgets>
-                                                <platform-specific>
-                                                    <html>
-                                                        <html-template location="component://productmgr/webapp/productmgr/ListProduct.ftl"/>
-                                                    </html>
-                                                </platform-specific>
-                                            </widgets>
-                                        </section>
-                                    </decorator-section>
-                                </decorator-screen>
-                            </widgets>
-                        </section>
+                        <screenlet title="Find Product">
+                            <platform-specific>
+                                <html>
+                                    <html-template
+                                            location="component://productmgr/webapp/productmgr/crud/FindProduct.ftl"/>
+                                </html>
+                            </platform-specific>
+                        </screenlet>
+                        <screenlet title="Search Results">
+                            <platform-specific>
+                                <html>
+                                    <html-template
+                                            location="component://productmgr/webapp/productmgr/crud/ListProduct.ftl"/>
+                                </html>
+                            </platform-specific>
+                        </screenlet>
                     </decorator-section>
                 </decorator-screen>
             </widgets>
         </section>
     </screen>
+
+
+
 
 
     <screen name="HelloWorld">
