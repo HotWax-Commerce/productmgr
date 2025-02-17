@@ -54,7 +54,6 @@ under the License.
              default-entity-name="Product"
              engine="groovy">
         <attribute name="productId" type="String" mode="IN" optional="false"/>
-        <attribute name="productCategoryId" type="String" mode="IN" optional="false"/>
         <attribute name="productName" type="String" mode="IN" optional="false"/>
         <attribute name="price" type="BigDecimal" mode="IN" optional="false"/>
         <attribute name="productId" type="String" mode="OUT"/>
