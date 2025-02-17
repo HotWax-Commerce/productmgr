@@ -47,4 +47,17 @@ under the License.
         <attribute name="productId" type="String" mode="OUT"/>
     </service>
 
+
+    <service name="updateProductService"
+             location="component://productmgr/groovyScripts/updateProduct.groovy"
+             invoke="updateProduct"
+             default-entity-name="Product"
+             engine="groovy">
+        <attribute name="productId" type="String" mode="IN" optional="false"/>
+        <attribute name="productCategoryId" type="String" mode="IN" optional="false"/>
+        <attribute name="productName" type="String" mode="IN" optional="false"/>
+        <attribute name="price" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="productId" type="String" mode="OUT"/>
+    </service>
+
 </services>
