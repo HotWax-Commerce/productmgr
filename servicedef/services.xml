@@ -47,7 +47,6 @@ under the License.
         <attribute name="productId" type="String" mode="OUT"/>
     </service>
 
-
     <service name="updateProductService"
              location="component://productmgr/groovyScripts/updateProduct.groovy"
              invoke="updateProduct"
@@ -58,5 +57,31 @@ under the License.
         <attribute name="price" type="BigDecimal" mode="IN" optional="false"/>
         <attribute name="productId" type="String" mode="OUT"/>
     </service>
+
+    <service name="assocProductToVirtual"
+             location="component://productmgr/groovyScripts/ProductAssoc.groovy"
+             invoke="createAssoc"
+             default-entity-name="Product"
+             engine="groovy">
+        <attribute name="virtualProductId" type="String" mode="IN" optional="false"/>
+        <attribute name="productId" type="String" mode="IN" optional="false"/>
+        <attribute name="productId" type="String" mode="OUT"/>
+    </service>
+
+
+    <service name="updateProductVariant"
+             location="component://productmgr/groovyScripts/ProductAssoc.groovy"
+             invoke="updateAssoc"
+             default-entity-name="Product"
+             engine="groovy">
+        <attribute name="virtualProductId" type="String" mode="IN" optional="false"/>
+        <attribute name="productId" type="String" mode="IN" optional="false"/>
+        <attribute name="newVariantProductId" type="String" mode="IN" optional="false"/>
+
+        <attribute name="virtualProductId" type="String" mode="OUT"/>
+    </service>
+
+
+
 
 </services>
