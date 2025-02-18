@@ -9,6 +9,12 @@ import org.apache.ofbiz.entity.condition.*
 
 def createAssoc(){
     Delegator delegator = (Delegator) context.delegator
+    logInfo("//////////  The context obtained from service call  /////")
+    logInfo("${context}")
+    logInfo("//////////  The delegator obtained from context   /////")
+    logInfo("${context.delegator}")
+
+
     GenericValue existingProduct = delegator.findOne("Product", ["productId": context.productId], false)
     GenericValue existingVirtualProduct = delegator.findOne("Product", ["productId": context.virtualProductId], false)
 

@@ -27,17 +27,16 @@
       <key-map field-name="productId"/>
     </view-link>
 
-    <view-link entity-alias="PCM" rel-entity-alias="PP">
+    <view-link entity-alias="P" rel-entity-alias="PP">
       <key-map field-name="productId"/>
     </view-link>
 
-    <view-link entity-alias="PP" rel-entity-alias="PFA">
+    <view-link entity-alias="P" rel-entity-alias="PFA" optional="true">
       <key-map field-name="productId"/>
     </view-link>
 
     <view-link entity-alias="PFA" rel-entity-alias="PF">
       <key-map field-name="productFeatureId"/>
     </view-link>
-
   </view-entity>
 </entitymodel>

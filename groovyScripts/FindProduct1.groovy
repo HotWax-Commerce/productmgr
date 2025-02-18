@@ -1,6 +1,6 @@
-import org.apache.ofbiz.base.util.UtilValidate
-import org.apache.ofbiz.entity.condition.EntityCondition
-import org.apache.ofbiz.entity.condition.EntityOperator
+import org.apache.ofbiz.base.util.UtilValidate;
+import org.apache.ofbiz.entity.condition.EntityCondition;
+import org.apache.ofbiz.entity.condition.EntityOperator;
 
 logInfo("---------------FindProductService called-----------");
 
@@ -9,7 +9,7 @@ def findMethod() {
     logInfo("---------------FindProductService called-----------");
     String productId = UtilValidate.isNotEmpty(parameters.get("productId")) ? parameters.get("productId") : null;
     String productName = UtilValidate.isNotEmpty(parameters.get("productName")) ? parameters.get("productName") : null;
-    BigDecimal price = UtilValidate.isNotEmpty(parameters.get("price")) ? new BigDecimal(parameters.get("price")) : null;
+    String price = UtilValidate.isNotEmpty(parameters.get("price")) ? parameters.get("price") : null;
     String productFeatureId = UtilValidate.isNotEmpty(parameters.get("productFeatureId")) ? parameters.get("productFeatureId") : null;
 
 
@@ -39,16 +39,15 @@ def findMethod() {
     def productList = select("productId", "productName", "price", "productFeatureId", "productCategoryId", "productTypeId")
             .from("FindProductView")
             .where(condList)
-            .orderBy("productId", "productFeatureId")
             .distinct()
             .cursorScrollInsensitive()
             .cache(true)
             .queryList()
 
-    logInfo("Found products: " + productList.size())
+    logInfo("Found products: ${productList.size()}")
     parameters.put("productList", productList)
     context.put("productList", productList)
-    logInfo("XXXXXXXXXXXXXXXXXX Context XXXXXXXXXXXXX: " + context)
-    logInfo("xxxxxxxxxxxxxxx parameters XXXXXXXXXXXXXXX: " + parameters)
+    logInfo("XXXXXXXXXXXXXXXXXX Context XXXXXXXXXXXXX: ${context}")
+    logInfo("xxxxxxxxxxxxxxx parameters XXXXXXXXXXXXXXX: ${parameters}")
 
 }

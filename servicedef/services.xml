@@ -43,7 +43,7 @@ under the License.
         <attribute name="productId" type="String" mode="IN" optional="true"/>
         <attribute name="productCategoryId" type="String" mode="IN" optional="false"/>
         <attribute name="productName" type="String" mode="IN" optional="false"/>
-        <attribute name="price" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="price" type="String" mode="IN" optional="false"/>
         <attribute name="productId" type="String" mode="OUT"/>
     </service>
 
